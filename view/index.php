@@ -69,7 +69,7 @@
             if ($courses && isset($courses['data'])) {
                 foreach ($courses['data'] as $course) {
                     echo '
-                    <div class="col-md-4 col-lg-3 mb-4 course-card">
+                    <div id="' . $course['id'] . ' " class="col-md-4 col-lg-3 mb-4 course-card">
                         <div class="card">
                             <img src="./assets/images/course-thumbnail.jpg" class="card-img-top" alt="Course">
                             <div class="card-body text-center">
@@ -79,6 +79,7 @@
                                     class="btn btn-success card-button view-course-btn"
                                     data-bs-toggle="modal"
                                     data-bs-target="#courseModal"
+                                    data-id="' . $course['id'] . ' "
                                     data-title="' . htmlspecialchars($course['title'] ?? "") . '"
                                     data-description="' . htmlspecialchars($course['description'] ?? "") . '"
                                     data-thumbnail="./assets/images/course-thumbnail.jpg">
@@ -133,7 +134,10 @@
                 <div class="modal-body text-center">
                     <h5 id="modalTitle" class="modal-title fs-4 fw-bold"></h5>
                     <p id="modalDescription" class="text-muted"></p>
-                    <button type="button" class="btn btn-primary rounded-pill px-4 py-2">Inscrever-se</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Editar Curso</button>
+                    <button type="button" id="deleteCourseBtn" class="btn btn-danger">Excluir Curso</button>
                 </div>
             </div>
         </div>

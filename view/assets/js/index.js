@@ -11,12 +11,39 @@ $(document).ready(function () {
         const title = button.data('title');
         const description = button.data('description');
         const thumbnail = button.data('thumbnail');
+        const courseId = button.data('id');
         console.log(thumbnail)
         console.log(title)
         console.log(description)
         $('#modalTitle').text(title);
         $('#modalDescription').text(description);
         $('#modalThumbnail').attr('src', thumbnail);
+
+        $('#deleteCourseBtn').data('id', courseId);
+        console.log(courseId)
+
+    });
+
+    $('#deleteCourseBtn').on('click', function () {
+        courseId = $(this).data('id');
+        console.log(courseId)
+        $.ajax({
+            url: 'http://localhost/revvo-test/api/index.php',
+            type: 'DELETE',
+            contentType: 'application/json',
+            data: JSON.stringify({ id: courseId }),
+            success: function (response) {
+                $(`a[data-id="${courseId}"]`).closest('.course-card').remove();
+
+                $('#courseModal').modal('hide');
+
+                alert("Curso Excluído!");
+            },
+            error: function (xhr, status, error) {
+                console.error("Failed to delete course:", error);
+                alert("Failed to delete course. Please try again.");
+            }
+        });
     });
 
     $('#createCourseForm').on('submit', function (e) {
@@ -37,9 +64,7 @@ $(document).ready(function () {
             data: JSON.stringify(courseData),
             success: function (response) {
                 $('#createCourseModal').modal('hide');
-
                 $('#createCourseForm')[0].reset();
-
                 const newCourseHtml = `
                     <div class="col-md-4 col-lg-3 mb-4">
                         <div class="card">
