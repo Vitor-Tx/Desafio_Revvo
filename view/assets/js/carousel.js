@@ -2,7 +2,7 @@ $(document).ready(function () {
     function addCarouselItem(imageSrc, title, description) {
         const newItem = `
             <div class="carousel-item">
-                <img src="${imageSrc}" class="d-block w-100" alt="${title}" style="object-fit: cover; object-position: center;">
+                <img src="${imageSrc}" class="d-block w-100" alt="${title}" style="object-fit: cover; object-position: center top;">
                 <div class="carousel-caption d-none d-md-block text-start">
                     <h5 class="text-uppercase">${title}</h5>
                     <p>${description}</p>
