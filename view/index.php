@@ -31,7 +31,6 @@
             </div>
         </div>
     </header>
-
     <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -56,7 +55,7 @@
     <section class="container my-5">
         <h2>Meus Cursos</h2>
         <div class="row">
-            <div class="col-md-4 col-lg-3 mb-4">
+            <div class="col-md-4 col-lg-3 mb-4" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#createCourseModal">
                 <div class="card add-course d-flex justify-content-center align-items-center">
                     <i class="fas fa-plus fa-3x"></i>
                     <p>Adicionar Curso</p>
@@ -95,6 +94,33 @@
             ?>
         </div>
     </section>
+    <div class="modal fade" id="createCourseModal" tabindex="-1" aria-labelledby="createCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-3 border-0">
+                <div class="modal-create-header position-relative p-0">
+                    <h5 class="modal-title text-center" id="createCourseModalLabel">Criar novo curso</h5>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createCourseForm" class="mb-5">
+                        <div class="mb-3">
+                            <label for="courseTitle" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="courseTitle" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseDescription" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="courseDescription" name="description" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseLink" class="form-label">Link do Curso</label>
+                            <input type="url" class="form-control" id="courseLink" name="link" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar Curso</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content rounded-3 border-0">
@@ -112,7 +138,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content rounded-3 border-0">
@@ -131,24 +156,19 @@
         </div>
     </div>
 
-
     <footer class="footer bg-light py-4 mt-5">
         <div class="container">
             <div class="row align-items-center">
-
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
                     <img src="./assets/images/logo.webp" alt="Logo" class="footer-logo mb-2">
                     <p class="text-muted small">Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur
                         ac, vestibulum at eros.</p>
                 </div>
-
                 <div class="col-md-4 text-center text-md-center mb-3 mb-md-0">
                     <h6 class="text-uppercase text-muted fw-bold">// Contato</h6>
                     <p class="text-muted small mb-0">(21) 98765-3434</p>
                     <p class="text-muted small mb-0">contato@leoelearning.com</p>
                 </div>
-
-
                 <div class="col-md-4 text-center text-md-end">
                     <h6 class="text-uppercase text-muted fw-bold">// Redes Sociais</h6>
                     <div class="footer-social-icons">

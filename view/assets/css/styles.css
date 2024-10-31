@@ -163,6 +163,24 @@ footer {
 .modal-header {
     height: 300px;
 }
+.modal-create-header {
+    height: 100px;
+}
+
+#createCourseForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#createCourseForm > * {
+    width: 100%;
+}
+
+
 
 .modal-illustration {
     background-color: #f8b195;
