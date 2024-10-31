@@ -17,7 +17,7 @@
         <div class="container d-flex align-items-center justify-content-between">
             <img src="./assets/images/logo.webp" alt="Logo" class="logo">
             <div class="header__search d-none d-md-flex align-items-center">
-                <input type="text" class="form-control" placeholder="Pesquisar cursos...">
+                <input type="text" id="courseSearch" class="form-control" placeholder="Pesquisar cursos...">
                 <button class="btn btn-link text-muted">
                     <i class="fas fa-search"></i>
                 </button>
@@ -69,7 +69,7 @@
             if ($courses && isset($courses['data'])) {
                 foreach ($courses['data'] as $course) {
                     echo '
-                    <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="col-md-4 col-lg-3 mb-4 course-card">
                         <div class="card">
                             <img src="./assets/images/course-thumbnail.jpg" class="card-img-top" alt="Course">
                             <div class="card-body text-center">

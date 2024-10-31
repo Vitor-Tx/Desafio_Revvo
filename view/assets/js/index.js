@@ -68,4 +68,20 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#courseSearch').on('input', function () {
+        const searchText = $(this).val().toLowerCase();
+        console.log("searchText: " + searchText);
+        $('.course-card').each(function () {
+            const courseTitle = $(this).find('.card-title').text().toLowerCase();
+            console.log("courseTitle: " + courseTitle);
+            if (courseTitle.includes(searchText)) {
+                console.log("shown");
+                $(this).show();
+            } else {
+                console.log("hidden");
+                $(this).hide();
+            }
+        });
+    });
 });
