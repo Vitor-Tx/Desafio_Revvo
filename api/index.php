@@ -16,7 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     if (isset($data['id'])) {
         echo $courseController->delete($data['id']);
     } else {
-        echo json_encode(["message" => "Course ID not provided"]);
+        echo json_encode([
+            "success" => false,
+            "message" => "Course ID not provided"
+        ]);
     }
 }
 
@@ -33,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     if (isset($data['id'])) {
         echo $courseController->update($data);
     } else {
-        echo json_encode(["message" => "Course ID not provided"]);
+        echo json_encode([
+            "success" => false,
+            "message" => "Course ID not provided"
+        ]);
     }
 }

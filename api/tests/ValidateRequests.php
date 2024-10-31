@@ -5,7 +5,7 @@ class ValidateRequests
     public static function assertEquals($expected, $actual)
     {
         if ($expected !== $actual) {
-            echo "Test failed: Expected '" . "', got '" . "'.\n";
+            echo "Test failed: Expected '" . json_encode($expected) . "', got '" . json_encode($actual) . "'.\n";
         } else {
             echo "Test passed: Expected and actual are equal.\n";
         }
@@ -24,7 +24,7 @@ class ValidateRequests
         }
 
         $context = stream_context_create($options);
-        $response = file_get_contents($url, false, $context);
+        $response = @file_get_contents($url, false, $context);
 
         if ($response === false) {
             throw new Exception("Error making API request to $url");
@@ -44,7 +44,14 @@ class ValidateRequests
                 'link' => 'https://example.com/php-basics',
             ];
             $response = self::apiRequest('POST', 'http://localhost/revvo-test/api/index.php', $data);
-            self::assertEquals(['message' => 'Course created successfully'], $response);
+            $data = [
+                'success' => $response['success'],
+                'message' => $response['message']
+            ];
+            self::assertEquals([
+                'success' => true,
+                'message' => 'Course created successfully'
+            ], $data);
         } catch (Exception $e) {
             echo "Error creating course: " . $e->getMessage() . "\n";
         }
@@ -54,10 +61,14 @@ class ValidateRequests
     {
         try {
             $response = self::apiRequest('GET', 'http://localhost/revvo-test/api/index.php');
-            $expectedResponse = [
-                ['id' => 1, 'title' => 'PHP Basics', 'description' => 'Learn PHP.', 'thumbnail' => 'example.jpg', 'link' => 'example.com'],
+            $data = [
+                'success' => $response['success'],
+                'message' => $response['message']
             ];
-            self::assertEquals($expectedResponse, $response);
+            self::assertEquals([
+                'success' => true,
+                "message" => "Courses found"
+            ], $data);
         } catch (Exception $e) {
             echo "Error fetching all courses: " . $e->getMessage() . "\n";
         }
@@ -68,8 +79,14 @@ class ValidateRequests
         try {
             $courseId = 2;
             $response = self::apiRequest('GET', 'http://localhost/revvo-test/api/index.php?id=' . $courseId);
-            $expectedResponse = ['id' => 1, 'title' => 'PHP Basics', 'description' => 'Learn PHP.', 'thumbnail' => 'example.jpg', 'link' => 'example.com'];
-            self::assertEquals($expectedResponse, $response);
+            $data = [
+                'success' => $response['success'],
+                'message' => $response['message']
+            ];
+            self::assertEquals([
+                'success' => true,
+                "message" => "Course found"
+            ], $data);
         } catch (Exception $e) {
             echo "Error fetching course by ID: " . $e->getMessage() . "\n";
         }
@@ -78,14 +95,16 @@ class ValidateRequests
     public static function testUpdateCourse()
     {
         try {
-            $courseId = 2;
             $data = [
                 'id' => '2',
                 'title' => 'Updated PHP Basics',
                 'description' => 'Learn the fundamentals of PHP programming with updates.',
             ];
-            $response = self::apiRequest('PUT', 'http://localhost/revvo-test/api/index.php?id=' . $courseId, $data);
-            self::assertEquals(['message' => 'Course updated successfully'], $response);
+            $response = self::apiRequest('PUT', 'http://localhost/revvo-test/api/index.php', $data);
+            self::assertEquals([
+                'success' => true,
+                'message' => 'Course updated successfully'
+            ], $response);
         } catch (Exception $e) {
             echo "Error updating course: " . $e->getMessage() . "\n";
         }
@@ -94,12 +113,11 @@ class ValidateRequests
     public static function testDeleteCourse()
     {
         try {
-            $courseId = 22;
             $data = [
                 'id' => '22',
             ];
-            $response = self::apiRequest('DELETE', 'http://localhost/revvo-test/api/index.php?id=' . $courseId, $data);
-            self::assertEquals(['message' => 'Course deleted successfully'], $response);
+            $response = self::apiRequest('DELETE', 'http://localhost/revvo-test/api/index.php', $data);
+            self::assertEquals(['success' => true, 'message' => 'Course deleted successfully'], $response);
         } catch (Exception $e) {
             echo "Error deleting course: " . $e->getMessage() . "\n";
         }
