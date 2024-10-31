@@ -69,6 +69,11 @@ class Course
 
         $stmt = $this->conn->prepare($query);
 
+        $this->title = htmlspecialchars(strip_tags($this->title ?? ""));
+        $this->description = htmlspecialchars(strip_tags($this->description ?? ""));
+        $this->thumbnail = htmlspecialchars(strip_tags($this->thumbnail ?? ""));
+        $this->link = htmlspecialchars(strip_tags($this->link ?? ""));
+
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':description', $this->description);
         $stmt->bindParam(':thumbnail', $this->thumbnail);

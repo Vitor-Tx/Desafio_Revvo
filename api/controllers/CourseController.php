@@ -128,6 +128,11 @@ class CourseController
         }
 
         $this->course->id = $data['id'];
+        $this->course->title = $data['title'] ?? "";
+        $this->course->description = $data['description'] ?? "";
+        $this->course->thumbnail = $data['thumbnail'] ?? "";
+        $this->course->images = htmlspecialchars_decode(json_encode($data['images']  ?? []));
+        $this->course->link = $data['link'] ?? "";
 
         if ($this->course->update()) {
             return json_encode([
