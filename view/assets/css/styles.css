@@ -32,26 +32,24 @@ body {
 
 }
 
-/* Sets a fixed height for card body to keep the cards uniform */
+
 .card-body {
     flex-grow: 1;
-    overflow: hidden; /* Hides any overflow content */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* Limits card title text to one line with ellipsis if it's too long */
 .card-title {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Truncates the card description with ellipsis if it exceeds a certain height */
 .card-text {
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Adjust the number of lines before truncation */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -99,12 +97,10 @@ footer {
     height: 32px;
 } */
 
-/* Logo styling */
 .logo {
     width: 100px;
 }
 
-/* Header styling */
 .header__search {
     width: 300px;
     position: relative;
@@ -151,7 +147,6 @@ footer {
     font-weight: bold;
 }
 
-/* Modal Styling */
 .modal-content {
     border: none;
     border-radius: 12px;
@@ -183,7 +178,6 @@ footer {
 
 
 .modal-illustration {
-    background-color: #f8b195;
     height: 100%;
     position: relative;
 }

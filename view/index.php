@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <header class="header bg-white py-3">
         <div class="container d-flex align-items-center justify-content-between">
             <img src="./assets/images/logo.webp" alt="Logo" class="logo">
@@ -81,6 +80,7 @@
                                     data-bs-target="#courseModal"
                                     data-id="' . $course['id'] . ' "
                                     data-title="' . htmlspecialchars($course['title'] ?? "") . '"
+                                    data-link="' . htmlspecialchars($course['link'] ?? "") . '"
                                     data-description="' . htmlspecialchars($course['description'] ?? "") . '"
                                     data-thumbnail="./assets/images/course-thumbnail.jpg">
                                     Ver Curso
@@ -122,6 +122,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content rounded-3 border-0">
@@ -131,13 +132,29 @@
                     </div>
                     <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center">
-                    <h5 id="modalTitle" class="modal-title fs-4 fw-bold"></h5>
-                    <p id="modalDescription" class="text-muted"></p>
+                <div class="modal-body">
+                    <h5 id="modalTitle" class="modal-title"></h5>
+                    <p id="modalDescription"></p>
+                    <form id="editCourseForm" style="display: none;">
+                        <div class="mb-3">
+                            <label for="editTitle" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="editTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editDescription" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="editDescription" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editLink" class="form-label">Link do curso</label>
+                            <input type="text" class="form-control" id="editLink">
+                        </div>
+                        <button type="button" id="saveEditBtn" class="btn btn-primary">Salvar</button>
+                        <button type="button" id="cancelEditBtn" class="btn btn-secondary">Cancelar</button>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Editar Curso</button>
-                    <button type="button" id="deleteCourseBtn" class="btn btn-danger">Excluir Curso</button>
+                    <button type="button" id="editCourseBtn" class="btn btn-warning">Edit Course</button>
+                    <button type="button" id="deleteCourseBtn" class="btn btn-danger">Delete Course</button>
                 </div>
             </div>
         </div>
@@ -159,7 +176,6 @@
             </div>
         </div>
     </div>
-
     <footer class="footer bg-light py-4 mt-5">
         <div class="container">
             <div class="row align-items-center">
@@ -168,11 +184,13 @@
                     <p class="text-muted small">Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur
                         ac, vestibulum at eros.</p>
                 </div>
+
                 <div class="col-md-4 text-center text-md-center mb-3 mb-md-0">
                     <h6 class="text-uppercase text-muted fw-bold">// Contato</h6>
                     <p class="text-muted small mb-0">(21) 98765-3434</p>
                     <p class="text-muted small mb-0">contato@leoelearning.com</p>
                 </div>
+
                 <div class="col-md-4 text-center text-md-end">
                     <h6 class="text-uppercase text-muted fw-bold">// Redes Sociais</h6>
                     <div class="footer-social-icons">

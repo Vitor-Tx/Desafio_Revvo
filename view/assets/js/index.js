@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log("hello")
 
     if (!localStorage.getItem('welcomeModalShown')) {
         $('#welcomeModal').modal('show');
@@ -8,20 +7,21 @@ $(document).ready(function () {
 
     $('#courseModal').on('show.bs.modal', function (event) {
         const button = $(event.relatedTarget);
+        const courseId = button.data('id');
         const title = button.data('title');
         const description = button.data('description');
         const thumbnail = button.data('thumbnail');
-        const courseId = button.data('id');
-        console.log(thumbnail)
-        console.log(title)
-        console.log(description)
+        const link = button.data('link');
+
         $('#modalTitle').text(title);
         $('#modalDescription').text(description);
         $('#modalThumbnail').attr('src', thumbnail);
 
+        $('#editTitle').val(title);
+        $('#editDescription').val(description);
+        $('#editLink').val(link);
         $('#deleteCourseBtn').data('id', courseId);
-        console.log(courseId)
-
+        $('#editCourseBtn').data('id', courseId);
     });
 
     $('#deleteCourseBtn').on('click', function () {
@@ -44,6 +44,61 @@ $(document).ready(function () {
                 alert("Failed to delete course. Please try again.");
             }
         });
+    });
+
+    $('#editCourseBtn').on('click', function () {
+        $('#editCourseForm').show();
+        $('#modalTitle, #modalDescription, #editCourseBtn, #deleteCourseBtn, .modal-img').hide();
+        $(".modal-header").addClass("modal-create-header");
+        $(".modal-illustration").append(`<h5 class="modal-title text-center">Editar curso</h5>`);
+    });
+
+    $('#cancelEditBtn').on('click', function () {
+        $('#editCourseForm').hide();
+        $('#modalTitle, #modalDescription, #editCourseBtn, #deleteCourseBtn, .modal-img').show();
+        $(".modal-header").removeClass("modal-create-header");
+        $(".modal-illustration h5").remove();
+    });
+
+    $('#saveEditBtn').on('click', function () {
+        const courseId = $('#editCourseBtn').data('id');
+        const updatedTitle = $('#editTitle').val();
+        const updatedDescription = $('#editDescription').val();
+        const updatedLink = $('#editLink').val();
+
+        $.ajax({
+            url: 'http://localhost/revvo-test/api/index.php',
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                id: courseId,
+                title: updatedTitle,
+                description: updatedDescription,
+                thumbnail: "thumbnail.jpg",
+                images: ["uploads/react1.jpg", "uploads/react2.jpg"],
+                link: updatedLink
+            }),
+            success: function (response) {
+                const courseCard = $(`a[data-id="${courseId}"]`).closest('.course-card');
+                courseCard.find('.course-title').text(updatedTitle);
+                $('#modalTitle').text(updatedTitle);
+                $('#modalDescription').text(updatedDescription);
+
+                $('#editCourseForm').hide();
+                $('#modalTitle, #modalDescription, #editCourseBtn, #deleteCourseBtn').show();
+
+                $('#courseModal').modal('hide');
+                alert("Course updated successfully!");
+            },
+            error: function (xhr, status, error) {
+                console.error("Failed to update course:", error);
+                alert("Failed to update course. Please try again.");
+            }
+        });
+        $('#editCourseForm').hide();
+        $('#modalTitle, #modalDescription, #editCourseBtn, #deleteCourseBtn, .modal-img').show();
+        $(".modal-header").removeClass("modal-create-header");
+        $(".modal-illustration h5").remove();
     });
 
     $('#createCourseForm').on('submit', function (e) {
