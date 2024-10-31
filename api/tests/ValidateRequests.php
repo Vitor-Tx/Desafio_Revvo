@@ -10,13 +10,6 @@ class ValidateRequests
             echo "Test failed: $message. Expected '$expected', got '$actual'.\n";
         }
     }
-
-    public static function assertJson($actual, $message = "")
-    {
-        json_decode($actual);
-        self::assertEquals(null, json_last_error(), $message);
-    }
-
     public static function run()
     {
         self::testCreateCourse();
@@ -25,6 +18,13 @@ class ValidateRequests
         self::testUpdateCourse();
         self::testDeleteCourse();
     }
+    private static function assertJson($response, $message)
+    {
+        json_decode($response);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception($message . ". Expected valid JSON, got: " . json_last_error_msg());
+        }
+    }
 
     private static function makeRequest($method, $url, $data = null)
     {
@@ -32,11 +32,20 @@ class ValidateRequests
             "http" => [
                 "header" => "Content-Type: application/json\r\n",
                 "method" => $method,
-                "content" => $data
+                "content" => $data,
+                "ignore_errors" => true,
             ]
         ];
+
         $context = stream_context_create($options);
-        return file_get_contents($url, false, $context);
+        $response = file_get_contents($url, false, $context);
+
+        if ($response === false) {
+            $error = error_get_last();
+            echo "Request failed: " . $error['message'] . "\n";
+        }
+
+        return $response ?: '0';
     }
 
     private static function testCreateCourse()
@@ -51,6 +60,11 @@ class ValidateRequests
         ];
         $response = self::makeRequest('POST', $apiUrl, json_encode($mockCourseData));
         self::assertJson($response, 'Creating a course should return valid JSON');
+        $responseArray = json_decode($response, true);
+        if (!isset($responseArray['message'])) {
+            throw new Exception('Creating a course did not return expected structure: ' . $response);
+        }
+        echo "Create Course Response: $response\n";
     }
 
     private static function testGetAllCourses()
@@ -58,6 +72,11 @@ class ValidateRequests
         $apiUrl = 'http://localhost/revvo-test/api/index.php';
         $response = self::makeRequest('GET', $apiUrl);
         self::assertJson($response, 'Fetching all courses should return valid JSON');
+        $responseArray = json_decode($response, true);
+        if (!is_array($responseArray)) {
+            throw new Exception('Fetching all courses did not return an array: ' . $response);
+        }
+        echo "Get All Courses Response: $response\n";
     }
 
     private static function testGetCourseById()
@@ -65,6 +84,11 @@ class ValidateRequests
         $apiUrl = 'http://localhost/revvo-test/api/index.php?id=1';
         $response = self::makeRequest('GET', $apiUrl);
         self::assertJson($response, 'Fetching course by ID should return valid JSON');
+        $responseArray = json_decode($response, true);
+        if (isset($responseArray['message']) && $responseArray['message'] === 'Course not found') {
+            throw new Exception('Course not found with ID 1: ' . $response);
+        }
+        echo "Get Course by ID Response: $response\n";
     }
 
     private static function testUpdateCourse()
@@ -80,6 +104,11 @@ class ValidateRequests
         ];
         $response = self::makeRequest('PUT', $apiUrl, json_encode($mockUpdateData));
         self::assertJson($response, 'Updating a course should return valid JSON');
+        $responseArray = json_decode($response, true);
+        if (!isset($responseArray['message'])) {
+            throw new Exception('Updating a course did not return expected structure: ' . $response);
+        }
+        echo "Update Course Response: $response\n";
     }
 
     private static function testDeleteCourse()
@@ -87,6 +116,11 @@ class ValidateRequests
         $apiUrl = 'http://localhost/revvo-test/api/index.php';
         $response = self::makeRequest('DELETE', $apiUrl, json_encode(['id' => 1]));
         self::assertJson($response, 'Deleting a course should return valid JSON');
+        $responseArray = json_decode($response, true);
+        if (!isset($responseArray['message'])) {
+            throw new Exception('Deleting a course did not return expected structure: ' . $response);
+        }
+        echo "Delete Course Response: $response\n";
     }
 }
 
