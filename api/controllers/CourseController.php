@@ -19,7 +19,7 @@ class CourseController
         if ($data['thumbnail'])
             $this->course->thumbnail = $data['thumbnail'];
         if ($data['images'])
-            $this->course->images = htmlspecialchars_decode(json_encode($data['images']));  // Encode images array to JSON
+            $this->course->images = htmlspecialchars_decode(json_encode($data['images']));
         if ($data['link'])
             $this->course->link = $data['link'];
 
@@ -36,6 +36,13 @@ class CourseController
 
     public function delete($id)
     {
+        if (!isset($data['id']) || !$this->course->exists($id)) {
+            return json_encode([
+                "success" => false,
+                "message" => "Course not found",
+            ]);
+        }
+
         $this->course->id = $id;
         return $this->course->delete()
             ? json_encode([
@@ -91,32 +98,26 @@ class CourseController
 
     public function update($data)
     {
-        if ($data['id'])
-            $this->course->id = $data['id'];
-        else
+        if (!isset($data['id']) || !$this->course->exists($data['id'])) {
             return json_encode([
                 "success" => false,
                 "message" => "Course not found",
             ]);
-        if ($data['title'])
-            $this->course->title = $data['title'];
-        if ($data['description'])
-            $this->course->description = $data['description'];
-        if ($data['thumbnail'])
-            $this->course->thumbnail = $data['thumbnail'];
-        if ($data['images'])
-            $this->course->images = htmlspecialchars_decode(json_encode($data['images']));  // Encode images array to JSON
-        if ($data['link'])
-            $this->course->link = $data['link'];
+        }
 
-        return $this->course->update()
-            ? json_encode([
+        $this->course->id = $data['id'];
+
+        $updateSuccess = $this->course->update();
+        if ($updateSuccess) {
+            return json_encode([
                 "success" => true,
                 "message" => "Course updated successfully",
-            ])
-            : json_encode([
+            ]);
+        } else {
+            return json_encode([
                 "success" => false,
                 "message" => "Course update failed",
             ]);
+        }
     }
 }

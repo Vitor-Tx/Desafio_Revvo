@@ -7,9 +7,10 @@ class ValidateRequests
         if ($expected !== $actual) {
             echo "Test failed: Expected '" . json_encode($expected) . "', got '" . json_encode($actual) . "'.\n";
         } else {
-            echo "Test passed: Expected and actual are equal.\n";
+            echo "Test passed: Expected '" . json_encode($expected) . "', got '" . json_encode($actual) . "'.\n";
         }
     }
+
     public static function apiRequest($method, $url, $data = null)
     {
         $options = [
@@ -98,7 +99,6 @@ class ValidateRequests
             $data = [
                 'id' => '2',
                 'title' => 'Updated PHP Basics',
-                'description' => 'Learn the fundamentals of PHP programming with updates.',
             ];
             $response = self::apiRequest('PUT', 'http://localhost/revvo-test/api/index.php', $data);
             self::assertEquals([
