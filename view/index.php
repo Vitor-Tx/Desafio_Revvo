@@ -97,35 +97,58 @@
     </section>
     <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header p-0">
-                    <img id="modalThumbnail" src="" alt="Course Thumbnail" class="w-100 rounded-top">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content rounded-3 border-0">
+                <div class="modal-header position-relative p-0">
+                    <div class="modal-illustration w-100 d-flex align-items-center justify-content-center position-relative">
+                        <img id="modalThumbnail" src="" alt="Course Thumbnail" class="modal-img">
+                    </div>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <h5 id="modalTitle" class="modal-title"></h5>
-                    <p id="modalDescription"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-body text-center">
+                    <h5 id="modalTitle" class="modal-title fs-4 fw-bold"></h5>
+                    <p id="modalDescription" class="text-muted"></p>
+                    <button type="button" class="btn btn-primary rounded-pill px-4 py-2">Inscrever-se</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-3 border-0">
+                <div class="modal-header position-relative p-0">
+                    <div class="modal-illustration w-100 d-flex align-items-center justify-content-center position-relative">
+                        <img src="./assets/images/modal_header.png" alt="Welcome Thumbnail" class="modal-img">
+                    </div>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h5 class="modal-title fs-4 fw-bold">Egestas Tortor Vulputate</h5>
+                    <p class="text-muted">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                    <button type="button" class="btn btn-primary rounded-pill px-4 py-2" data-bs-dismiss="modal">Inscrever-se</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <footer class="footer bg-light py-4 mt-5">
         <div class="container">
             <div class="row align-items-center">
+
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
                     <img src="./assets/images/logo.webp" alt="Logo" class="footer-logo mb-2">
                     <p class="text-muted small">Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur
                         ac, vestibulum at eros.</p>
                 </div>
+
                 <div class="col-md-4 text-center text-md-center mb-3 mb-md-0">
                     <h6 class="text-uppercase text-muted fw-bold">// Contato</h6>
                     <p class="text-muted small mb-0">(21) 98765-3434</p>
                     <p class="text-muted small mb-0">contato@leoelearning.com</p>
                 </div>
+
+
                 <div class="col-md-4 text-center text-md-end">
                     <h6 class="text-uppercase text-muted fw-bold">// Redes Sociais</h6>
                     <div class="footer-social-icons">

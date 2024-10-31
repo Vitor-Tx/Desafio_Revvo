@@ -1,5 +1,11 @@
 $(document).ready(function () {
     console.log("hello")
+
+    if (!localStorage.getItem('welcomeModalShown')) {
+        $('#welcomeModal').modal('show');
+        localStorage.setItem('welcomeModalShown', 'true');
+    }
+
     $('#courseModal').on('show.bs.modal', function (event) {
         const button = $(event.relatedTarget);
         const title = button.data('title');
