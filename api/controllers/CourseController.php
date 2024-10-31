@@ -12,16 +12,22 @@ class CourseController
 
     public function create($data)
     {
-        if ($data['title'])
-            $this->course->title = $data['title'];
-        if ($data['description'])
-            $this->course->description = $data['description'];
-        if ($data['thumbnail'])
-            $this->course->thumbnail = $data['thumbnail'];
-        if ($data['images'])
-            $this->course->images = htmlspecialchars_decode(json_encode($data['images']));
-        if ($data['link'])
-            $this->course->link = $data['link'];
+        if (
+            !isset($data['title'])
+            || !isset($data['description'])
+            || !isset($data['thumbnail'])
+            || !isset($data['images'])
+            || !isset($data['link'])
+        )
+            return json_encode([
+                "success" => false,
+                "message" => "Required data not informed"
+            ]);
+        $this->course->title = $data['title'];
+        $this->course->description = $data['description'];
+        $this->course->thumbnail = $data['thumbnail'];
+        $this->course->images = htmlspecialchars_decode(json_encode($data['images']));
+        $this->course->link = $data['link'];
 
         return $this->course->create()
             ? json_encode([
