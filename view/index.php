@@ -37,7 +37,7 @@
                 <div class="carousel-caption d-none d-md-block text-start">
                     <h5 class="text-uppercase">Lorem Ipsum</h5>
                     <p>Aenean lacinia bibendum nulla sed consectetur...</p>
-                    <a href="#" class="btn btn-outline-light">Ver Curso</a>
+                    <a href="#" class="btn btn-outline-dark">Ver Curso</a>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
 
     <section class="container my-5">
         <h2>Meus Cursos</h2>
-        <div class="row">
+        <div class="row courses-list">
             <div class="col-md-4 col-lg-3 mb-4" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#createCourseModal">
                 <div class="card add-course d-flex justify-content-center align-items-center">
                     <i class="fas fa-plus fa-3x"></i>
