@@ -187,6 +187,123 @@ class ValidateRequests
             echo "Error fetching course by invalid ID: " . $e->getMessage() . "\n";
         }
     }
+
+    public static function testCreateCourseWithInvalidData()
+    {
+        try {
+
+            $data = [
+                'title' => '',
+                'description' => 'Some description',
+                'thumbnail' => 'uploads/thumbnail.jpg',
+                'images' => ['uploads/image1.jpg'],
+                'link' => 'https://example.com/course-link',
+            ];
+            $response = self::apiRequest('POST', 'http://localhost/revvo-test/api/index.php', $data);
+            self::assertEquals([
+                'success' => false,
+                'message' => 'Course creation failed',
+            ], $response);
+        } catch (Exception $e) {
+            echo "Error creating course with invalid data: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function testUpdateCourseWithMissingFields()
+    {
+        try {
+            $data = [
+                'id' => '1',
+            ];
+            $response = self::apiRequest('PUT', 'http://localhost/revvo-test/api/index.php', $data);
+            self::assertEquals([
+                'success' => false,
+                'message' => 'Course not found',
+            ], $response);
+        } catch (Exception $e) {
+            echo "Error updating course with missing fields: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function testGetAllCoursesWhenEmpty()
+    {
+        try {
+            $response = self::apiRequest('GET', 'http://localhost/revvo-test/api/index.php');
+            self::assertEquals([
+                'success' => false,
+                'message' => 'No Course found',
+            ], [
+                'success' => $response['success'],
+                'message' => $response['message']
+            ]);
+        } catch (Exception $e) {
+            echo "Error fetching all courses when empty: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function testGetCourseByIdNotInteger()
+    {
+        try {
+            $response = self::apiRequest('GET', 'http://localhost/revvo-test/api/index.php?id=abc');
+            self::assertEquals([
+                'success' => false,
+                'message' => 'Course not found',
+            ], $response);
+        } catch (Exception $e) {
+            echo "Error fetching course by non-integer ID: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function testDeleteCourseWithoutId()
+    {
+        try {
+            $data = [];
+            $response = self::apiRequest('DELETE', 'http://localhost/revvo-test/api/index.php', $data);
+            self::assertEquals([
+                'success' => false,
+                'message' => 'Course ID not provided',
+            ], $response);
+        } catch (Exception $e) {
+            echo "Error deleting course without ID: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function testCreateCourseWithInvalidLink()
+    {
+        try {
+            $data = [
+                'title' => 'PHP Advanced',
+                'description' => 'Advanced PHP programming concepts.',
+                'thumbnail' => 'uploads/php_advanced_thumbnail.jpg',
+                'images' => ['uploads/php_advanced_1.jpg'],
+                'link' => 'invalid-url',
+            ];
+            $response = self::apiRequest('POST', 'http://localhost/revvo-test/api/index.php', $data);
+            self::assertEquals([
+                'success' => false,
+                'message' => 'Course creation failed',
+            ], $response);
+        } catch (Exception $e) {
+            echo "Error creating course with invalid link: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function testUpdateCourseWithInvalidId()
+    {
+        try {
+            $data = [
+                'id' => 'invalid_id',
+                'title' => 'Updated Title',
+            ];
+            $response = self::apiRequest('PUT', 'http://localhost/revvo-test/api/index.php', $data);
+            self::assertEquals([
+                'success' => false,
+                'message' => 'Course not found',
+            ], $response);
+        } catch (Exception $e) {
+            echo "Error updating course with invalid ID: " . $e->getMessage() . "\n";
+        }
+    }
 }
 
 ValidateRequests::testCreateCourse();
@@ -198,3 +315,10 @@ ValidateRequests::testCreateCourseWithoutTitle();
 ValidateRequests::testDeleteNonExistentCourse();
 ValidateRequests::testUpdateNonExistentCourse();
 ValidateRequests::testGetCourseByInvalidId();
+ValidateRequests::testCreateCourseWithInvalidData();
+ValidateRequests::testUpdateCourseWithMissingFields();
+ValidateRequests::testGetAllCoursesWhenEmpty();
+ValidateRequests::testGetCourseByIdNotInteger();
+ValidateRequests::testDeleteCourseWithoutId();
+ValidateRequests::testCreateCourseWithInvalidLink();
+ValidateRequests::testUpdateCourseWithInvalidId();

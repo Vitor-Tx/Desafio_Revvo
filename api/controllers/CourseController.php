@@ -18,31 +18,39 @@ class CourseController
             || !isset($data['thumbnail'])
             || !isset($data['images'])
             || !isset($data['link'])
-        )
+        ) {
+            http_response_code(400);
             return json_encode([
                 "success" => false,
                 "message" => "Required data not informed"
             ]);
+        }
+
         $this->course->title = $data['title'];
         $this->course->description = $data['description'];
         $this->course->thumbnail = $data['thumbnail'];
         $this->course->images = htmlspecialchars_decode(json_encode($data['images']));
         $this->course->link = $data['link'];
 
-        return $this->course->create()
-            ? json_encode([
+        if ($this->course->create()) {
+            http_response_code(201);
+            return json_encode([
                 "success" => true,
                 "message" => "Course created successfully",
-            ])
-            : json_encode([
+            ]);
+        } else {
+            http_response_code(500);
+            return json_encode([
                 "success" => false,
                 "message" => "Course creation failed",
             ]);
+        }
     }
 
     public function delete($id)
     {
-        if (!isset($data['id']) || !$this->course->exists($id)) {
+        if (!$this->course->exists($id)) {
+            http_response_code(404);
             return json_encode([
                 "success" => false,
                 "message" => "Course not found",
@@ -50,15 +58,19 @@ class CourseController
         }
 
         $this->course->id = $id;
-        return $this->course->delete()
-            ? json_encode([
+        if ($this->course->delete()) {
+            http_response_code(200);
+            return json_encode([
                 "success" => true,
                 "message" => "Course deleted successfully",
-            ])
-            : json_encode([
+            ]);
+        } else {
+            http_response_code(500);
+            return json_encode([
                 "success" => false,
                 "message" => "Course deletion failed",
             ]);
+        }
     }
 
     public function getAll()
@@ -69,6 +81,7 @@ class CourseController
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $courses[] = $row;
         }
+
         if ($stmt->rowCount() > 0) {
             return json_encode([
                 "success" => true,
@@ -76,6 +89,7 @@ class CourseController
                 "data" => $courses
             ]);
         } else {
+            http_response_code(404);
             return json_encode([
                 "success" => false,
                 "message" => "No Course found",
@@ -95,6 +109,7 @@ class CourseController
                 "data" => $stmt->fetch(PDO::FETCH_ASSOC)
             ]);
         } else {
+            http_response_code(404);
             return json_encode([
                 "success" => false,
                 "message" => "Course not found",
@@ -105,6 +120,7 @@ class CourseController
     public function update($data)
     {
         if (!isset($data['id']) || !$this->course->exists($data['id'])) {
+            http_response_code(404);
             return json_encode([
                 "success" => false,
                 "message" => "Course not found",
@@ -113,13 +129,13 @@ class CourseController
 
         $this->course->id = $data['id'];
 
-        $updateSuccess = $this->course->update();
-        if ($updateSuccess) {
+        if ($this->course->update()) {
             return json_encode([
                 "success" => true,
                 "message" => "Course updated successfully",
             ]);
         } else {
+            http_response_code(500);
             return json_encode([
                 "success" => false,
                 "message" => "Course update failed",
