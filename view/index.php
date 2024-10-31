@@ -33,7 +33,7 @@
     <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="./assets/images/banner.jpeg" class="d-block w-100" alt="Carousel Image">
+                <img src="./assets/images/banner.jpeg" class="d-block w-100" alt="Carousel Image 1" style="object-fit: cover; object-position: center;">
                 <div class="carousel-caption d-none d-md-block text-start">
                     <h5 class="text-uppercase">Lorem Ipsum</h5>
                     <p>Aenean lacinia bibendum nulla sed consectetur...</p>
@@ -210,6 +210,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/carousel.js"></script>
 </body>
 
 </html>
