@@ -1,0 +1,49 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.search-bar {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.card {
+    border: none;
+}
+
+.card .btn-success {
+    font-weight: bold;
+}
+
+.add-course {
+    border: 2px dashed #ccc;
+    color: #666;
+    cursor: pointer;
+    height: 100%;
+    text-align: center;
+}
+
+.add-course p {
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+footer {
+    font-size: 0.9rem;
+}
