@@ -16,14 +16,12 @@
     <header class="header bg-white py-3">
         <div class="container d-flex align-items-center justify-content-between">
             <img src="./assets/images/logo.webp" alt="Logo" class="logo">
-
             <div class="header__search d-none d-md-flex align-items-center">
                 <input type="text" class="form-control" placeholder="Pesquisar cursos...">
                 <button class="btn btn-link text-muted">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-
             <div class="header__profile d-flex align-items-center">
                 <img src="./assets/images/profile_photo.jpeg" alt="User" class="rounded-circle" width="70" height="70">
                 <div class="ms-2">
@@ -40,9 +38,7 @@
                 <img src="./assets/images/banner.jpeg" class="d-block w-100" alt="Carousel Image">
                 <div class="carousel-caption d-none d-md-block text-start">
                     <h5 class="text-uppercase">Lorem Ipsum</h5>
-                    <p>Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum
-                        at eros.</p>
+                    <p>Aenean lacinia bibendum nulla sed consectetur...</p>
                     <a href="#" class="btn btn-outline-light">Ver Curso</a>
                 </div>
             </div>
@@ -61,23 +57,61 @@
         <h2>Meus Cursos</h2>
         <div class="row">
             <div class="col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./assets/images/course-thumbnail.jpg" class="card-img-top" alt="Course">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Pellentesque Malesuada</h5>
-                        <p class="card-text">Curabitur blandit tempus porttitor...</p>
-                        <a href="#" class="btn btn-success">Ver Curso</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-3 mb-4">
                 <div class="card add-course d-flex justify-content-center align-items-center">
                     <i class="fas fa-plus fa-3x"></i>
                     <p>Adicionar Curso</p>
                 </div>
             </div>
+            <?php
+            $apiUrl = 'http://localhost/revvo-test/api/index.php';
+            $response = file_get_contents($apiUrl);
+            $courses = json_decode($response, true);
+
+            if ($courses && isset($courses['data'])) {
+                foreach ($courses['data'] as $course) {
+                    echo '
+                    <div class="col-md-4 col-lg-3 mb-4">
+                        <div class="card">
+                            <img src="./assets/images/course-thumbnail.jpg" class="card-img-top" alt="Course">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">' . htmlspecialchars($course['title'] ?? "") . '</h5>
+                                <p class="card-text">' . htmlspecialchars($course['description'] ?? "") . '</p>
+                                <a href="#"
+                                    class="btn btn-success card-button view-course-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#courseModal"
+                                    data-title="' . htmlspecialchars($course['title'] ?? "") . '"
+                                    data-description="' . htmlspecialchars($course['description'] ?? "") . '"
+                                    data-thumbnail="./assets/images/course-thumbnail.jpg">
+                                    Ver Curso
+                                </a>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            } else {
+                echo '<p>No courses found.</p>';
+            }
+            ?>
         </div>
     </section>
+    <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <img id="modalThumbnail" src="" alt="Course Thumbnail" class="w-100 rounded-top">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5 id="modalTitle" class="modal-title"></h5>
+                    <p id="modalDescription"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer bg-light py-4 mt-5">
         <div class="container">
@@ -110,6 +144,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./assets/js/index.js"></script>
 </body>
 
 </html>

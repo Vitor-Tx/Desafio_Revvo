@@ -25,6 +25,40 @@ body {
 
 .card {
     border: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+/* Sets a fixed height for card body to keep the cards uniform */
+.card-body {
+    flex-grow: 1;
+    overflow: hidden; /* Hides any overflow content */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Limits card title text to one line with ellipsis if it's too long */
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Truncates the card description with ellipsis if it exceeds a certain height */
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Adjust the number of lines before truncation */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-button {
+    border-radius: 20px;
 }
 
 .card .btn-success {
@@ -49,7 +83,7 @@ footer {
 }
 
 .footer-logo {
-    width: 100px; /* Adjust size as needed */
+    width: 100px;
 }
 
 .footer-social-icons i {
@@ -67,7 +101,7 @@ footer {
 
 /* Logo styling */
 .logo {
-    width: 100px; /* Adjust width as needed */
+    width: 100px;
 }
 
 /* Header styling */
