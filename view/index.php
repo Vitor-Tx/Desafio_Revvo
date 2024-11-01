@@ -35,7 +35,7 @@
             <div class="carousel-item active">
                 <img src="./assets/images/banner.jpeg" class="d-block w-100" alt="Carousel Image 1">
                 <div class="carousel-caption d-none d-md-block text-start">
-                    <h5 class="text-uppercase">Lorem Ipsum</h5>
+                    <h5 class="text-uppercase">Lorem Ipsum 1</h5>
                     <p>Aenean lacinia bibendum nulla sed consectetur...</p>
                     <a href="#" class="btn btn-outline-dark">Ver Curso</a>
                 </div>
@@ -50,7 +50,6 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
     <section class="container my-5">
         <h2>Meus Cursos</h2>
         <div class="row courses-list">
@@ -122,7 +121,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content rounded-3 border-0">
@@ -134,7 +132,7 @@
                 </div>
                 <div class="modal-body">
                     <h5 id="modalTitle" class="modal-title"></h5>
-                    <p id="modalDescription"></p>
+                    <p id="modalDescription" class="modal-description"></p>
                     <form id="editCourseForm" style="display: none;">
                         <div class="mb-3">
                             <label for="editTitle" class="form-label">Título</label>
@@ -153,8 +151,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="editCourseBtn" class="btn btn-warning">Edit Course</button>
-                    <button type="button" id="deleteCourseBtn" class="btn btn-danger">Delete Course</button>
+                    <button type="button" id="editCourseBtn" class="btn btn-warning">Editar Curso</button>
+                    <button type="button" id="deleteCourseBtn" class="btn btn-danger">Excluir Curso</button>
                 </div>
             </div>
         </div>
