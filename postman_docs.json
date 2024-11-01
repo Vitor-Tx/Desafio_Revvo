@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "5f873a43-c14c-43ed-b4bd-8cb00fcc3268",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7600791"
+	},
+	"item": [
+		{
+			"name": "Criar curso",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"React\",\r\n    \"description\": \"An introductory course to React.\",\r\n    \"thumbnail\": \"thumbnail.jpg\",\r\n    \"images\": [\"uploads/react1.jpg\", \"uploads/react2.jpg\"],\r\n    \"link\": \"https://example.com/react-basics\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/revvo-test/api/index.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"revvo-test",
+						"api",
+						"index.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Curso",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|7W9j8M3AGxrIieaovm0ilptUxBTqXwHebs1UmcQg4d6f5d8a",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : \"24\",\r\n    \"title\" : \"Updated PHP Basics\",\r\n    \"description\" : \"Learn the fundamentals of PHP programming with updates.\",\r\n    \"thumbnail\": \"thumbnail.jpg\",\r\n    \"images\": [\"uploads/react1.jpg\", \"uploads/react2.jpg\"],\r\n    \"link\": \"https://example.com/react-basics\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/revvo-test/api/index.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"revvo-test",
+						"api",
+						"index.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cursos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|7W9j8M3AGxrIieaovm0ilptUxBTqXwHebs1UmcQg4d6f5d8a",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1/revvo-test/api/index.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"revvo-test",
+						"api",
+						"index.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Curso por id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1/revvo-test/api/index.php?id=2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"revvo-test",
+						"api",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar curso por id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1/revvo-test/api/index.php?id=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"revvo-test",
+						"api",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://127.0.0.1:8000"
+		}
+	]
+}
