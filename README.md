@@ -29,6 +29,22 @@ Foi desenvolvido no **Windows** utilizando **XAMPP** (Apache e phpMyAdmin/MySQL)
 
 ---
 
+## Arquitetura
+
+Utilizei uma arquitetura simples, focando em separar o front do back end, e organizar cada parte do projeto em seu devido lugar.
+
+Na pasta `/api`, temos:
+
+- `/config`, que contém o arquivo `db.php`, o qual configura a conexão com o banco de dados;
+- `/controllers`, que contém o arquivo `CourseController.php`, o único controller porque o único modelo é o dos Cursos;
+- `/models`, que contém o arquivo `Course.php`, a definição de modelo da tabela dos cursos, e integra as requisições com o banco de dados, enquanto também limpa os dados enviados nos corpos das requisições antes de inserí-las no banco;
+- `/tests`, que contém o arquivo `ValidateRequests.php`, um conjunto de testes unitários feito em PHP puro;
+- `index.php`, o arquivo com as definições das rotas e a API.
+
+Já na pasta `/view`, temos:
+- `/assets`, que contém o arquivo de estilos css, dois scripts de jquery, e as imagens utilizadas no projeto;
+- `index.php`, a real view do projeto, que integra tudo em si.
+
 ## Funcionalidades
 
 <p align="center">

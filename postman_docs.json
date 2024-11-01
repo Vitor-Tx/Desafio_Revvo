@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "5f873a43-c14c-43ed-b4bd-8cb00fcc3268",
-		"name": "New Collection",
+		"name": "Desafio Revvo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "7600791"
 	},
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"React\",\r\n    \"description\": \"An introductory course to React.\",\r\n    \"thumbnail\": \"thumbnail.jpg\",\r\n    \"images\": [\"uploads/react1.jpg\", \"uploads/react2.jpg\"],\r\n    \"link\": \"https://example.com/react-basics\"\r\n}\r\n",
+					"raw": "{\r\n    \"title\": \"React\",\r\n    \"description\": \"An introductory course to React.\",\r\n    \"thumbnail\": \"thumbnail.jpg\",\r\n    \"images\": [\r\n        \"uploads/react1.jpg\",\r\n        \"uploads/react2.jpg\"\r\n    ],\r\n    \"link\": \"https://example.com/react-basics\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -52,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : \"24\",\r\n    \"title\" : \"Updated PHP Basics\",\r\n    \"description\" : \"Learn the fundamentals of PHP programming with updates.\",\r\n    \"thumbnail\": \"thumbnail.jpg\",\r\n    \"images\": [\"uploads/react1.jpg\", \"uploads/react2.jpg\"],\r\n    \"link\": \"https://example.com/react-basics\"\r\n}",
+					"raw": "{\r\n    \"id\": \"23\",\r\n    \"title\": \"Updated PHP Basics\",\r\n    \"description\": \"Learn the fundamentals of PHP programming with updates.\",\r\n    \"thumbnail\": \"thumbnail.jpg\",\r\n    \"images\": [\r\n        \"uploads/react1.jpg\",\r\n        \"uploads/react2.jpg\"\r\n    ],\r\n    \"link\": \"https://example.com/react-basics\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -75,7 +75,7 @@
 			"response": []
 		},
 		{
-			"name": "Cursos",
+			"name": "Listar Cursos",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -96,13 +96,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1/revvo-test/api/index.php",
+					"raw": "http://localhost/revvo-test/api/index.php",
 					"protocol": "http",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"localhost"
 					],
 					"path": [
 						"revvo-test",
@@ -135,7 +132,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1/revvo-test/api/index.php?id=2",
+					"raw": "http://127.0.0.1/revvo-test/api/index.php?id=23",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -151,7 +148,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "2"
+							"value": "23"
 						}
 					]
 				}
@@ -179,25 +176,25 @@
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"20\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://127.0.0.1/revvo-test/api/index.php?id=1",
+					"raw": "http://localhost/revvo-test/api/index.php",
 					"protocol": "http",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"localhost"
 					],
 					"path": [
 						"revvo-test",
 						"api",
 						"index.php"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "1"
-						}
 					]
 				}
 			},
