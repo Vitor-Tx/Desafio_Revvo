@@ -36,7 +36,7 @@
                 <img src="./assets/images/banner.jpeg" class="d-block w-100" alt="Carousel Image 1">
                 <div class="carousel-caption d-none d-md-block text-start">
                     <h5 class="text-uppercase">Lorem Ipsum 1</h5>
-                    <p>Aenean lacinia bibendum nulla sed consectetur...</p>
+                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellat iusto ratione temporibus sunt eaque delectus neque fugiat saepe quisquam? </p>
                     <a href="#" class="btn btn-outline-dark">Ver Curso</a>
                 </div>
             </div>
