@@ -45,6 +45,8 @@ Já na pasta `/view`, temos:
 - `/assets`, que contém o arquivo de estilos css, dois scripts de jquery, e as imagens utilizadas no projeto;
 - `index.php`, a real view do projeto, que integra tudo em si.
 
+## **Atenção! Os testes e a documentação do postman foram escritos pressupondo que o projeto esteja nesse caminho: `C:/xampp/htdocs/revvo-test`, por isso, a url dos testes é `localhost/revvo-test/api/index.php`! Caso desejem testar as requisições do postman e os testes unitários, por favor alterem o nome da pasta raíz para `revvo-test`!**
+
 ## Funcionalidades
 
 <p align="center">
@@ -88,8 +90,9 @@ Para rodar o projeto localmente, você precisará de um ambiente com **XAMPP** c
 
 2. No navegador, acesse o projeto:
 
-    ```
-    http://localhost/desafio_revvo/view/index.php
+    ```shell
+    http://localhost/desafio_revvo/view/index.php 
+    # ou http://localhost/revvo_test/view/index.php caso tenham mudado o nome da pasta!
     ```
 
 3. Certifique-se de que o servidor Apache e o MySQL estão em execução no XAMPP.
